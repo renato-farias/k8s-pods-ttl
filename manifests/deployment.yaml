@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-pods-ttl
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      application: k8s-pods-ttl
+  template:
+    metadata:
+      labels:
+        application: k8s-pods-ttl
+    spec:
+      serviceAccountName: pods-ttler
+      containers:
+      - name: k8s-pods-ttl
+        image: rcdfs/k8s-pods-ttl
